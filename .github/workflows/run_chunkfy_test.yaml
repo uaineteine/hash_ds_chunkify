@@ -41,5 +41,5 @@ jobs:
 
     - name: Run hash script
       run: |
-        python hash_ds_chunkify.py hash_ds/testdata/data1.psv usernames,Header2
+        python hash_ds_chunkify.py hash_ds/testdata/data1.psv usernames,Header2 hashed_data1.parquet
 
