@@ -11,7 +11,7 @@ A configuration template is used to start the process and datasets are automatic
 One can select the truncation limit for this output
 
 ```ps
-python -m hash_ds_chunkify ../hash_ds/testdata/data1.psv usernames,Header2
+python -m hash_ds_chunkify ../hash_ds/testdata/data1.psv usernames,Header2 outputname.parquet
 ```
 
 ## Package Requirements
