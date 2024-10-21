@@ -20,6 +20,9 @@ variables = read_ini_file(config_path)
 for key, value in variables.items():
     globals()[key] = value
 
+#change types of some
+chunk_lim = int(chunk_lim)
+
 # Print variables to verify
 for key in variables.keys():
     print(f"{key} = {globals()[key]}")
@@ -43,9 +46,9 @@ def chunkify_df(df, chunk_size, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     chunk_list = []
-    for i, chunk in enumerate(range(0, len(df), chunk_size)):
+    for i, chunk in enumerate(range(0, len(df.index), chunk_size)):
         chunk_df = df.iloc[chunk:chunk + chunk_size]
-        chunk_path = os.path.join(output_dir, f"chunk_{i}.csv")
+        chunk_path = os.path.join(output_dir, f"chunk_{i}.parquet")
         chunk_df.to_parquet(chunk_path, index=False)
         chunk_list.append(chunk_path)
     return chunk_list
