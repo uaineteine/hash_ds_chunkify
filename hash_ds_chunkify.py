@@ -1,45 +1,5 @@
-print("[hash_ds_chunkify.py] reading config file")
-import configparser
-
-#read the config file
-def read_ini_file(file_path):
-    config = configparser.ConfigParser()
-    config.read(file_path)
-    
-    variables = {}
-    for section in config.sections():
-        for key, value in config.items(section):
-            variables[key] = value
-    
-    return variables
-
-config_path = "config.ini"
-variables = read_ini_file(config_path)
-
-# Assign variables dynamically to the global namespace
-for key, value in variables.items():
-    globals()[key] = value
-
-#change types of some
-chunk_lim = int(chunk_lim)
-
-# Print variables to verify
-for key in variables.keys():
-    print(f"{key} = {globals()[key]}")
-
 print("[hash_ds_chunkify.py] importing libraries...")
-import os
-import sys
-
-def add_to_path(directory):
-    if directory not in sys.path:
-        sys.path.append(directory)
-
-add_to_path(hash_ds_loc)
-from libs import *
-from hash_ds import read_file
-import subprocess
-import pyarrow as pq
+from libraries import *
 
 print("[hash_ds_chunkify.py] defining functions...")
 def chunkify_df(df, chunk_size, output_dir):
@@ -85,7 +45,7 @@ def main():
 
     print("[hash_ds_chunkfy.py] recombining...")
     # Combine the processed chunks
-    combined_df = pd.concat([pd.read_parquet(chunk_path) for chunk_path in chunks], ignore_index=True)
+    combined_df = pd.concat([read_file(chunk_path) for chunk_path in chunks], ignore_index=True)
     print(combined_df)
 
 if __name__ == "__main__":
