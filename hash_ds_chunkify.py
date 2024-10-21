@@ -85,7 +85,7 @@ def main():
 
     print("[hash_ds_chunkfy.py] recombining...")
     # Combine the processed chunks
-    combined_df = pd.concat([pd.read_parquet(chunk_path) for chunk_path in chunks])
+    combined_df = pd.concat([pd.read_parquet(chunk_path) for chunk_path in chunks], ignore_index=True)
     print(combined_df)
 
 if __name__ == "__main__":
