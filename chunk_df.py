@@ -1,3 +1,6 @@
+import os
+import pandas as pd
+import pyarrow
 print("[hash_ds_chunkify::chunk_df.py] defining functions")
 
 def chunkify_df(df, chunk_size, output_dir):
