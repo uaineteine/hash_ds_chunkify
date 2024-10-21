@@ -33,5 +33,5 @@ def remove_directory(directory_path):
         os.rmdir(directory_path)
         print(f'Removed directory: {directory_path}')
     except Exception as e:
-        print(f'Error removing directory {directory_path}: {e}'
+        print(f'Error removing directory {directory_path}: {e}')
     print("[hash_ds_chunkify::chunk_df.py] removed directory for chunks")
