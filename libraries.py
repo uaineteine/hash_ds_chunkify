@@ -37,5 +37,6 @@ def add_to_path(directory):
         sys.path.append(directory)
 
 add_to_path(hash_ds_loc)
+#load from hash_ds libraries
 from libs import *
-from hash_ds import read_file
+from chunk_df import *
