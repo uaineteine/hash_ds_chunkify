@@ -50,20 +50,29 @@ def chunkify_df(df, chunk_size, output_dir):
         chunk_list.append(chunk_path)
     return chunk_list
 
+def read_and_clean_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+    
+    # Remove additional empty lines and trailing whitespace
+    cleaned_content = "\n".join([line.rstrip() for line in content.splitlines() if line.strip()])
+    
+    return cleaned_content
+
 def main():
     parser = argparse.ArgumentParser(description="Chunkify dataframe and hash specified columns")
     parser.add_argument('filepath', type=str, help='Path to the file to hash')
     parser.add_argument('columns', type=str, help='Comma-separated list of columns to hash')
-    parser.add_argument('key', type=str, help='Key for hashing')
     parser.add_argument('length', type=int, help='Length of hash to truncate to')
     parser.add_argument('chunks_dir', type=str, help='Temporary path for the chunks')
-
+    
     args = parser.parse_args()
+    key = read_and_clean_file(keyfile_loc)
     filepath = args.filepath
     columns = args.columns
-    key = args.key
     length = args.length
     chunks_dir = args.chunks_dir
+    
 
     print("[hash_ds_chunkfy.py] reading source file")
     df = read_file(filepath)
