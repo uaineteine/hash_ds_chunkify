@@ -1,6 +1,6 @@
 ## HASH_DS_CHUNKIFY
 
-[![Test hash_ds.py](https://github.com/uaineteine/hash_ds_chunkify/actions/workflows/run_chunkfy_test.yaml.yml/badge.svg)](https://github.com/uaineteine/hash_ds_chunkify/actions/workflows/run_chunkfy_test.yaml.yml)
+[![Run Hash Script](https://github.com/uaineteine/hash_ds_chunkify/actions/workflows/run_chunkfy_test.yaml/badge.svg)](https://github.com/uaineteine/hash_ds_chunkify/actions/workflows/run_chunkfy_test.yaml)
 
 A extension to HASH_DS, a tool that will hash dataframes on a list of variables and a key. The python script it multi-threaded to optimise the execution to the number of user cores that are available.
 
