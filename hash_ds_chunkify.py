@@ -41,7 +41,7 @@ def main():
     print("[hash_ds_chunkfy.py] hashing chunks...")
     os.chdir(hash_ds_loc)
     for chunk_path in chunks:
-        subprocess.run(['python', "-m", 'hash_ds', chunk_path, columns, key, str(trunc_length)])
+        subprocess.run(['python', "-m", 'hash_ds', chunk_path, columns, key, str(trunc_length), chunk_path])
 
     print("[hash_ds_chunkfy.py] recombining...")
     # Combine the processed chunks
