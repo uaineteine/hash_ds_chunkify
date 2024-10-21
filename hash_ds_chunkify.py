@@ -63,16 +63,11 @@ def main():
     parser = argparse.ArgumentParser(description="Chunkify dataframe and hash specified columns")
     parser.add_argument('filepath', type=str, help='Path to the file to hash')
     parser.add_argument('columns', type=str, help='Comma-separated list of columns to hash')
-    parser.add_argument('length', type=int, help='Length of hash to truncate to')
-    parser.add_argument('chunks_dir', type=str, help='Temporary path for the chunks')
     
     args = parser.parse_args()
     key = read_and_clean_file(keyfile_loc)
     filepath = args.filepath
     columns = args.columns
-    length = args.length
-    chunks_dir = args.chunks_dir
-    
 
     print("[hash_ds_chunkfy.py] reading source file")
     df = read_file(filepath)
@@ -82,7 +77,7 @@ def main():
 
     print("[hash_ds_chunkfy.py] hashing chunks...")
     for chunk_path in chunks:
-        subprocess.run(['python', 'hash_ds.py', chunk_path, columns, key, str(length)])
+        subprocess.run(['python', 'hash_ds.py', chunk_path, columns, key, str(trunc_length)])
 
     print("[hash_ds_chunkfy.py] recombining...")
     # Combine the processed chunks
