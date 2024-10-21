@@ -79,8 +79,9 @@ def main():
     chunks = chunkify_df(df, chunk_lim, chunks_dir)
 
     print("[hash_ds_chunkfy.py] hashing chunks...")
+    os.chdir(hash_ds_loc)
     for chunk_path in chunks:
-        subprocess.run(['python', 'hash_ds.py', chunk_path, columns, key, str(trunc_length)])
+        subprocess.run(['python', "-m", 'hash_ds', chunk_path, columns, key, str(trunc_length)])
 
     print("[hash_ds_chunkfy.py] recombining...")
     # Combine the processed chunks
