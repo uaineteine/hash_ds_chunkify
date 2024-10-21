@@ -25,6 +25,9 @@ jobs:
         pip install -r hash_ds/requirements.txt
         pip install -r requirements.txt
 
+    - name: Copy config ini for test
+      run: cp -rf .github/workflows/config.ini config.ini
+
     - name: Run hash script
       run: |
         python hash_ds_chunkify.py testdata/data1.psv usernames,Header2 secret_key 24 10 tmpdir
