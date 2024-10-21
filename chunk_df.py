@@ -19,3 +19,19 @@ def combine_list_ds(chunks):
     # Combine the processed chunks
     combined_df = pd.concat([read_file(chunk_path) for chunk_path in chunks], ignore_index=True)
     return combined_df
+
+def delete_chunks(chunks):
+    for filepath in chunks:
+        try:
+            os.remove(filepath)
+        except Exception as e:
+            print(f'Error deleting file {filepath}: {e}')
+    print("[hash_ds_chunkify::chunk_df.py] deleted all temporary chunks")
+
+def remove_directory(directory_path):
+    try:
+        os.rmdir(directory_path)
+        print(f'Removed directory: {directory_path}')
+    except Exception as e:
+        print(f'Error removing directory {directory_path}: {e}'
+    print("[hash_ds_chunkify::chunk_df.py] removed directory for chunks")
