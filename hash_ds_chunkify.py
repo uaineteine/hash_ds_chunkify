@@ -35,6 +35,12 @@ def main():
     print("[hash_ds_chunkfy.py] recombining...")
     # Combine the processed chunks
     combined_df = combine_list_ds(chunks)
+
+    #cleanup
+    delete_chunks(chunks)
+    remove_directory(chunks_dir)
+
+    #save ds
     print(combined_df)
 
 if __name__ == "__main__":
