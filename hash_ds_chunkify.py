@@ -26,26 +26,29 @@ def main():
     print("[hash_ds_chunkfy.py] reading source file")
     df = read_file(filepath)
 
-    print("[hash_ds_chunkfy.py] dividing df into chunks")
-    chunks = chunkify_df(df, chunk_lim, chunks_dir)
+    if len(df.index) > chunk_lim:
+        print("[hash_ds_chunkfy.py] dividing df into chunks")
+        chunks = chunkify_df(df, chunk_lim, chunks_dir)
 
-    print("[hash_ds_chunkfy.py] hashing chunks...")
-    os.chdir(hash_ds_loc)
-    for chunk_path in chunks:
-        subprocess.run(['python', "-m", 'hash_ds', chunk_path, columns, key, str(trunc_length), chunk_path])
+        print("[hash_ds_chunkfy.py] hashing chunks...")
+        os.chdir(hash_ds_loc)
+        for chunk_path in chunks:
+            subprocess.run(['python', "-m", 'hash_ds', chunk_path, columns, key, str(trunc_length), chunk_path])
 
-    print("[hash_ds_chunkify.py] recombining...")
-    # Combine the processed chunks
-    combined_df = combine_list_ds(chunks)
+        print("[hash_ds_chunkify.py] recombining...")
+        # Combine the processed chunks
+        combined_df = combine_list_ds(chunks)
 
-    #cleanup
-    delete_chunks(chunks)
-    remove_directory(chunks_dir)
+        #cleanup
+        delete_chunks(chunks)
+        remove_directory(chunks_dir)
 
-    #save ds
-    print("[hash_ds_chunkify.py] saving hashed file")
-    combined_df.to_parquet(output_path)
-    print(combined_df)
+        #save ds
+        print("[hash_ds_chunkify.py] saving hashed file")
+        combined_df.to_parquet(output_path)
+        print(combined_df)
+    else:
+        print("[hash_ds_chunkify.py] df is smaller than chunk limit, use hash_ds instead")
 
 if __name__ == "__main__":
     main()
